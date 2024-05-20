@@ -1,0 +1,7 @@
+name: livedns_go
+runtime: go
+description: Create a Gandi LiveDNS record using Pulumi
+config:
+  pulumi:tags:
+    value:
+      pulumi:template: go

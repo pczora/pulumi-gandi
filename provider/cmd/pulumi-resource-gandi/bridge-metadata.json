@@ -1,0 +1,299 @@
+{
+    "auto-aliasing": {
+        "resources": {
+            "gandi_dnssec_key": {
+                "current": "gandi:domains/dNSSecKey:DNSSecKey",
+                "past": [
+                    {
+                        "name": "gandi:index/dnssecKey:DnssecKey",
+                        "inCodegen": true,
+                        "majorVersion": 0
+                    }
+                ]
+            },
+            "gandi_domain": {
+                "current": "gandi:domains/domain:Domain",
+                "past": [
+                    {
+                        "name": "gandi:index/domain:Domain",
+                        "inCodegen": true,
+                        "majorVersion": 0
+                    }
+                ],
+                "fields": {
+                    "admin": {
+                        "maxItemsOne": true
+                    },
+                    "billing": {
+                        "maxItemsOne": true
+                    },
+                    "nameservers": {
+                        "maxItemsOne": false
+                    },
+                    "owner": {
+                        "maxItemsOne": true
+                    },
+                    "tags": {
+                        "maxItemsOne": false
+                    },
+                    "tech": {
+                        "maxItemsOne": true
+                    }
+                }
+            },
+            "gandi_email_forwarding": {
+                "current": "gandi:email/forwarding:Forwarding",
+                "past": [
+                    {
+                        "name": "gandi:index/emailForwarding:EmailForwarding",
+                        "inCodegen": true,
+                        "majorVersion": 0
+                    }
+                ],
+                "fields": {
+                    "destinations": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "gandi_glue_record": {
+                "current": "gandi:domains/glueRecord:GlueRecord",
+                "past": [
+                    {
+                        "name": "gandi:index/glueRecord:GlueRecord",
+                        "inCodegen": true,
+                        "majorVersion": 0
+                    }
+                ],
+                "fields": {
+                    "ips": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "gandi_livedns_domain": {
+                "current": "gandi:livedns/domain:Domain",
+                "past": [
+                    {
+                        "name": "gandi:index/livednsDomain:LivednsDomain",
+                        "inCodegen": true,
+                        "majorVersion": 0
+                    }
+                ]
+            },
+            "gandi_livedns_record": {
+                "current": "gandi:livedns/record:Record",
+                "past": [
+                    {
+                        "name": "gandi:index/livednsRecord:LivednsRecord",
+                        "inCodegen": true,
+                        "majorVersion": 0
+                    }
+                ],
+                "fields": {
+                    "values": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "gandi_mailbox": {
+                "current": "gandi:email/mailbox:Mailbox",
+                "past": [
+                    {
+                        "name": "gandi:index/mailbox:Mailbox",
+                        "inCodegen": true,
+                        "majorVersion": 0
+                    }
+                ],
+                "fields": {
+                    "aliases": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "gandi_nameservers": {
+                "current": "gandi:domains/nameservers:Nameservers",
+                "past": [
+                    {
+                        "name": "gandi:index/nameservers:Nameservers",
+                        "inCodegen": true,
+                        "majorVersion": 0
+                    }
+                ],
+                "fields": {
+                    "nameservers": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "gandi_simplehosting_instance": {
+                "current": "gandi:simplehosting/instance:Instance",
+                "past": [
+                    {
+                        "name": "gandi:index/simplehostingInstance:SimplehostingInstance",
+                        "inCodegen": true,
+                        "majorVersion": 0
+                    }
+                ]
+            },
+            "gandi_simplehosting_vhost": {
+                "current": "gandi:simplehosting/vHost:VHost",
+                "past": [
+                    {
+                        "name": "gandi:index/simplehostingVhost:SimplehostingVhost",
+                        "inCodegen": true,
+                        "majorVersion": 0
+                    }
+                ]
+            }
+        },
+        "datasources": {
+            "gandi_domain": {
+                "current": "gandi:domains/getDomain:getDomain",
+                "past": [
+                    {
+                        "name": "gandi:index/getDomain:getDomain",
+                        "inCodegen": true,
+                        "majorVersion": 0
+                    }
+                ],
+                "fields": {
+                    "nameservers": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "gandi_glue_record": {
+                "current": "gandi:domains/getGlueRecord:getGlueRecord",
+                "past": [
+                    {
+                        "name": "gandi:index/getGlueRecord:getGlueRecord",
+                        "inCodegen": true,
+                        "majorVersion": 0
+                    }
+                ],
+                "fields": {
+                    "ips": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "gandi_livedns_domain": {
+                "current": "gandi:livedns/getDomain:getDomain",
+                "past": [
+                    {
+                        "name": "gandi:index/getLivednsDomain:getLivednsDomain",
+                        "inCodegen": true,
+                        "majorVersion": 0
+                    }
+                ]
+            },
+            "gandi_livedns_domain_ns": {
+                "current": "gandi:livedns/getDomainNameserver:getDomainNameserver",
+                "past": [
+                    {
+                        "name": "gandi:index/getLivednsDomainNs:getLivednsDomainNs",
+                        "inCodegen": true,
+                        "majorVersion": 0
+                    }
+                ],
+                "fields": {
+                    "nameservers": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "gandi_mailbox": {
+                "current": "gandi:email/getMailbox:getMailbox",
+                "past": [
+                    {
+                        "name": "gandi:index/getMailbox:getMailbox",
+                        "inCodegen": true,
+                        "majorVersion": 0
+                    }
+                ]
+            }
+        }
+    },
+    "auto-settings": {
+        "resources": {
+            "gandi_dnssec_key": {
+                "aliases": [
+                    "gandi:index/dnssecKey:DnssecKey"
+                ]
+            },
+            "gandi_domain": {
+                "aliases": [
+                    "gandi:index/domain:Domain"
+                ]
+            },
+            "gandi_email_forwarding": {
+                "aliases": [
+                    "gandi:index/emailForwarding:EmailForwarding"
+                ]
+            },
+            "gandi_glue_record": {
+                "aliases": [
+                    "gandi:index/glueRecord:GlueRecord"
+                ]
+            },
+            "gandi_livedns_domain": {
+                "aliases": [
+                    "gandi:index/livednsDomain:LivednsDomain"
+                ]
+            },
+            "gandi_livedns_record": {
+                "aliases": [
+                    "gandi:index/livednsRecord:LivednsRecord"
+                ]
+            },
+            "gandi_mailbox": {
+                "aliases": [
+                    "gandi:index/mailbox:Mailbox"
+                ]
+            },
+            "gandi_nameservers": {
+                "aliases": [
+                    "gandi:index/nameservers:Nameservers"
+                ]
+            },
+            "gandi_simplehosting_instance": {
+                "aliases": [
+                    "gandi:index/simplehostingInstance:SimplehostingInstance"
+                ]
+            },
+            "gandi_simplehosting_vhost": {
+                "aliases": [
+                    "gandi:index/simplehostingVhost:SimplehostingVhost"
+                ]
+            }
+        },
+        "datasources": {
+            "gandi_domain": {
+                "renames": [
+                    "gandi:index/getDomain:getDomain"
+                ]
+            },
+            "gandi_glue_record": {
+                "renames": [
+                    "gandi:index/getGlueRecord:getGlueRecord"
+                ]
+            },
+            "gandi_livedns_domain": {
+                "renames": [
+                    "gandi:index/getLivednsDomain:getLivednsDomain"
+                ]
+            },
+            "gandi_livedns_domain_ns": {
+                "renames": [
+                    "gandi:index/getLivednsDomainNs:getLivednsDomainNs"
+                ]
+            },
+            "gandi_mailbox": {
+                "renames": [
+                    "gandi:index/getMailbox:getMailbox"
+                ]
+            }
+        }
+    }
+}

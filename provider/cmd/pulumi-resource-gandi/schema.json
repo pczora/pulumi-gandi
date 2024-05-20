@@ -1,0 +1,2958 @@
+{
+    "name": "gandi",
+    "description": "A Pulumi package for creating and managing gandi cloud resources.",
+    "keywords": [
+        "pczora",
+        "gandi",
+        "category/cloud"
+    ],
+    "homepage": "https://www.pulumi.com",
+    "license": "Apache-2.0",
+    "attribution": "This Pulumi package is based on the [`gandi` Terraform Provider](https://github.com/go-gandi/terraform-provider-gandi).",
+    "repository": "https://github.com/pczora/pulumi-gandi",
+    "publisher": "pczora",
+    "meta": {
+        "moduleFormat": "(.*)(?:/[^/]*)"
+    },
+    "language": {
+        "csharp": {
+            "packageReferences": {
+                "Pulumi": "3.*"
+            },
+            "compatibility": "tfbridge20"
+        },
+        "go": {
+            "importBasePath": "github.com/pczora/pulumi-gandi/sdk/go/gandi",
+            "generateResourceContainerTypes": true,
+            "generateExtraInputTypes": true
+        },
+        "nodejs": {
+            "packageDescription": "A Pulumi package for creating and managing gandi cloud resources.",
+            "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/go-gandi/terraform-provider-gandi)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi-gandi` repo](https://github.com/pczora/pulumi-gandi/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-provider-gandi` repo](https://github.com/go-gandi/terraform-provider-gandi/issues).",
+            "dependencies": {
+                "@pulumi/pulumi": "^3.0.0"
+            },
+            "devDependencies": {
+                "@types/mime": "^2.0.0",
+                "@types/node": "^10.0.0"
+            },
+            "compatibility": "tfbridge20",
+            "disableUnionOutputTypes": true
+        },
+        "python": {
+            "requires": {
+                "pulumi": "\u003e=3.0.0,\u003c4.0.0"
+            },
+            "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/go-gandi/terraform-provider-gandi)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi-gandi` repo](https://github.com/pczora/pulumi-gandi/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-provider-gandi` repo](https://github.com/go-gandi/terraform-provider-gandi/issues).",
+            "compatibility": "tfbridge20",
+            "pyproject": {}
+        }
+    },
+    "config": {
+        "variables": {
+            "dryRun": {
+                "type": "boolean",
+                "description": "Prevent the Domain provider from taking certain actions\n"
+            },
+            "key": {
+                "type": "string",
+                "description": "(DEPRECATED) A Gandi API key\n",
+                "deprecationMessage": "use personal_access_token instead",
+                "secret": true
+            },
+            "personalAccessToken": {
+                "type": "string",
+                "description": "A Gandi API Personal Access Token\n",
+                "secret": true
+            },
+            "sharingId": {
+                "type": "string",
+                "description": "(DEPRECATED) A Gandi Sharing ID\n",
+                "deprecationMessage": "use personal_access_token instead"
+            },
+            "url": {
+                "type": "string",
+                "description": "The Gandi API URL\n"
+            }
+        }
+    },
+    "types": {
+        "gandi:domains/DomainAdmin:DomainAdmin": {
+            "properties": {
+                "city": {
+                    "type": "string",
+                    "description": "City for the contact\n"
+                },
+                "country": {
+                    "type": "string",
+                    "description": "The two letter country code for the contact\n"
+                },
+                "dataObfuscated": {
+                    "type": "boolean",
+                    "description": "Whether or not to obfuscate contact data in WHOIS\n"
+                },
+                "email": {
+                    "type": "string",
+                    "description": "Contact email address\n"
+                },
+                "extraParameters": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "Extra parameters, needed for some jurisdictions\n"
+                },
+                "familyName": {
+                    "type": "string",
+                    "description": "Family name of the contact\n"
+                },
+                "givenName": {
+                    "type": "string",
+                    "description": "Given name of the contact\n"
+                },
+                "mailObfuscated": {
+                    "type": "boolean",
+                    "description": "Whether or not to obfuscate contact email in WHOIS\n"
+                },
+                "organisation": {
+                    "type": "string",
+                    "description": "The legal name of the organisation. Required for types other than person\n"
+                },
+                "phone": {
+                    "type": "string",
+                    "description": "Phone number for the contact\n"
+                },
+                "state": {
+                    "type": "string",
+                    "description": "The state code for the contact\n"
+                },
+                "streetAddr": {
+                    "type": "string",
+                    "description": "Street Address of the contact\n"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "One of 'person', 'company', 'association', 'public body', or 'reseller'\n"
+                },
+                "zip": {
+                    "type": "string",
+                    "description": "Postal Code/Zipcode of the contact\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "city",
+                "country",
+                "email",
+                "familyName",
+                "givenName",
+                "phone",
+                "streetAddr",
+                "type",
+                "zip"
+            ]
+        },
+        "gandi:domains/DomainBilling:DomainBilling": {
+            "properties": {
+                "city": {
+                    "type": "string",
+                    "description": "City for the contact\n"
+                },
+                "country": {
+                    "type": "string",
+                    "description": "The two letter country code for the contact\n"
+                },
+                "dataObfuscated": {
+                    "type": "boolean",
+                    "description": "Whether or not to obfuscate contact data in WHOIS\n"
+                },
+                "email": {
+                    "type": "string",
+                    "description": "Contact email address\n"
+                },
+                "extraParameters": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "Extra parameters, needed for some jurisdictions\n"
+                },
+                "familyName": {
+                    "type": "string",
+                    "description": "Family name of the contact\n"
+                },
+                "givenName": {
+                    "type": "string",
+                    "description": "Given name of the contact\n"
+                },
+                "mailObfuscated": {
+                    "type": "boolean",
+                    "description": "Whether or not to obfuscate contact email in WHOIS\n"
+                },
+                "organisation": {
+                    "type": "string",
+                    "description": "The legal name of the organisation. Required for types other than person\n"
+                },
+                "phone": {
+                    "type": "string",
+                    "description": "Phone number for the contact\n"
+                },
+                "state": {
+                    "type": "string",
+                    "description": "The state code for the contact\n"
+                },
+                "streetAddr": {
+                    "type": "string",
+                    "description": "Street Address of the contact\n"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "One of 'person', 'company', 'association', 'public body', or 'reseller'\n"
+                },
+                "zip": {
+                    "type": "string",
+                    "description": "Postal Code/Zipcode of the contact\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "city",
+                "country",
+                "email",
+                "familyName",
+                "givenName",
+                "phone",
+                "streetAddr",
+                "type",
+                "zip"
+            ]
+        },
+        "gandi:domains/DomainOwner:DomainOwner": {
+            "properties": {
+                "city": {
+                    "type": "string",
+                    "description": "City for the contact\n"
+                },
+                "country": {
+                    "type": "string",
+                    "description": "The two letter country code for the contact\n"
+                },
+                "dataObfuscated": {
+                    "type": "boolean",
+                    "description": "Whether or not to obfuscate contact data in WHOIS\n"
+                },
+                "email": {
+                    "type": "string",
+                    "description": "Contact email address\n"
+                },
+                "extraParameters": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "Extra parameters, needed for some jurisdictions\n"
+                },
+                "familyName": {
+                    "type": "string",
+                    "description": "Family name of the contact\n"
+                },
+                "givenName": {
+                    "type": "string",
+                    "description": "Given name of the contact\n"
+                },
+                "mailObfuscated": {
+                    "type": "boolean",
+                    "description": "Whether or not to obfuscate contact email in WHOIS\n"
+                },
+                "organisation": {
+                    "type": "string",
+                    "description": "The legal name of the organisation. Required for types other than person\n"
+                },
+                "phone": {
+                    "type": "string",
+                    "description": "Phone number for the contact\n"
+                },
+                "state": {
+                    "type": "string",
+                    "description": "The state code for the contact\n"
+                },
+                "streetAddr": {
+                    "type": "string",
+                    "description": "Street Address of the contact\n"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "One of 'person', 'company', 'association', 'public body', or 'reseller'\n"
+                },
+                "zip": {
+                    "type": "string",
+                    "description": "Postal Code/Zipcode of the contact\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "city",
+                "country",
+                "email",
+                "familyName",
+                "givenName",
+                "phone",
+                "streetAddr",
+                "type",
+                "zip"
+            ]
+        },
+        "gandi:domains/DomainTech:DomainTech": {
+            "properties": {
+                "city": {
+                    "type": "string",
+                    "description": "City for the contact\n"
+                },
+                "country": {
+                    "type": "string",
+                    "description": "The two letter country code for the contact\n"
+                },
+                "dataObfuscated": {
+                    "type": "boolean",
+                    "description": "Whether or not to obfuscate contact data in WHOIS\n"
+                },
+                "email": {
+                    "type": "string",
+                    "description": "Contact email address\n"
+                },
+                "extraParameters": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "Extra parameters, needed for some jurisdictions\n"
+                },
+                "familyName": {
+                    "type": "string",
+                    "description": "Family name of the contact\n"
+                },
+                "givenName": {
+                    "type": "string",
+                    "description": "Given name of the contact\n"
+                },
+                "mailObfuscated": {
+                    "type": "boolean",
+                    "description": "Whether or not to obfuscate contact email in WHOIS\n"
+                },
+                "organisation": {
+                    "type": "string",
+                    "description": "The legal name of the organisation. Required for types other than person\n"
+                },
+                "phone": {
+                    "type": "string",
+                    "description": "Phone number for the contact\n"
+                },
+                "state": {
+                    "type": "string",
+                    "description": "The state code for the contact\n"
+                },
+                "streetAddr": {
+                    "type": "string",
+                    "description": "Street Address of the contact\n"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "One of 'person', 'company', 'association', 'public body', or 'reseller'\n"
+                },
+                "zip": {
+                    "type": "string",
+                    "description": "Postal Code/Zipcode of the contact\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "city",
+                "country",
+                "email",
+                "familyName",
+                "givenName",
+                "phone",
+                "streetAddr",
+                "type",
+                "zip"
+            ]
+        },
+        "gandi:index/DomainAdmin:DomainAdmin": {
+            "properties": {
+                "city": {
+                    "type": "string",
+                    "description": "City for the contact\n"
+                },
+                "country": {
+                    "type": "string",
+                    "description": "The two letter country code for the contact\n"
+                },
+                "dataObfuscated": {
+                    "type": "boolean",
+                    "description": "Whether or not to obfuscate contact data in WHOIS\n"
+                },
+                "email": {
+                    "type": "string",
+                    "description": "Contact email address\n"
+                },
+                "extraParameters": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "Extra parameters, needed for some jurisdictions\n"
+                },
+                "familyName": {
+                    "type": "string",
+                    "description": "Family name of the contact\n"
+                },
+                "givenName": {
+                    "type": "string",
+                    "description": "Given name of the contact\n"
+                },
+                "mailObfuscated": {
+                    "type": "boolean",
+                    "description": "Whether or not to obfuscate contact email in WHOIS\n"
+                },
+                "organisation": {
+                    "type": "string",
+                    "description": "The legal name of the organisation. Required for types other than person\n"
+                },
+                "phone": {
+                    "type": "string",
+                    "description": "Phone number for the contact\n"
+                },
+                "state": {
+                    "type": "string",
+                    "description": "The state code for the contact\n"
+                },
+                "streetAddr": {
+                    "type": "string",
+                    "description": "Street Address of the contact\n"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "One of 'person', 'company', 'association', 'public body', or 'reseller'\n"
+                },
+                "zip": {
+                    "type": "string",
+                    "description": "Postal Code/Zipcode of the contact\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "city",
+                "country",
+                "email",
+                "familyName",
+                "givenName",
+                "phone",
+                "streetAddr",
+                "type",
+                "zip"
+            ]
+        },
+        "gandi:index/DomainBilling:DomainBilling": {
+            "properties": {
+                "city": {
+                    "type": "string",
+                    "description": "City for the contact\n"
+                },
+                "country": {
+                    "type": "string",
+                    "description": "The two letter country code for the contact\n"
+                },
+                "dataObfuscated": {
+                    "type": "boolean",
+                    "description": "Whether or not to obfuscate contact data in WHOIS\n"
+                },
+                "email": {
+                    "type": "string",
+                    "description": "Contact email address\n"
+                },
+                "extraParameters": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "Extra parameters, needed for some jurisdictions\n"
+                },
+                "familyName": {
+                    "type": "string",
+                    "description": "Family name of the contact\n"
+                },
+                "givenName": {
+                    "type": "string",
+                    "description": "Given name of the contact\n"
+                },
+                "mailObfuscated": {
+                    "type": "boolean",
+                    "description": "Whether or not to obfuscate contact email in WHOIS\n"
+                },
+                "organisation": {
+                    "type": "string",
+                    "description": "The legal name of the organisation. Required for types other than person\n"
+                },
+                "phone": {
+                    "type": "string",
+                    "description": "Phone number for the contact\n"
+                },
+                "state": {
+                    "type": "string",
+                    "description": "The state code for the contact\n"
+                },
+                "streetAddr": {
+                    "type": "string",
+                    "description": "Street Address of the contact\n"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "One of 'person', 'company', 'association', 'public body', or 'reseller'\n"
+                },
+                "zip": {
+                    "type": "string",
+                    "description": "Postal Code/Zipcode of the contact\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "city",
+                "country",
+                "email",
+                "familyName",
+                "givenName",
+                "phone",
+                "streetAddr",
+                "type",
+                "zip"
+            ]
+        },
+        "gandi:index/DomainOwner:DomainOwner": {
+            "properties": {
+                "city": {
+                    "type": "string",
+                    "description": "City for the contact\n"
+                },
+                "country": {
+                    "type": "string",
+                    "description": "The two letter country code for the contact\n"
+                },
+                "dataObfuscated": {
+                    "type": "boolean",
+                    "description": "Whether or not to obfuscate contact data in WHOIS\n"
+                },
+                "email": {
+                    "type": "string",
+                    "description": "Contact email address\n"
+                },
+                "extraParameters": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "Extra parameters, needed for some jurisdictions\n"
+                },
+                "familyName": {
+                    "type": "string",
+                    "description": "Family name of the contact\n"
+                },
+                "givenName": {
+                    "type": "string",
+                    "description": "Given name of the contact\n"
+                },
+                "mailObfuscated": {
+                    "type": "boolean",
+                    "description": "Whether or not to obfuscate contact email in WHOIS\n"
+                },
+                "organisation": {
+                    "type": "string",
+                    "description": "The legal name of the organisation. Required for types other than person\n"
+                },
+                "phone": {
+                    "type": "string",
+                    "description": "Phone number for the contact\n"
+                },
+                "state": {
+                    "type": "string",
+                    "description": "The state code for the contact\n"
+                },
+                "streetAddr": {
+                    "type": "string",
+                    "description": "Street Address of the contact\n"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "One of 'person', 'company', 'association', 'public body', or 'reseller'\n"
+                },
+                "zip": {
+                    "type": "string",
+                    "description": "Postal Code/Zipcode of the contact\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "city",
+                "country",
+                "email",
+                "familyName",
+                "givenName",
+                "phone",
+                "streetAddr",
+                "type",
+                "zip"
+            ]
+        },
+        "gandi:index/DomainTech:DomainTech": {
+            "properties": {
+                "city": {
+                    "type": "string",
+                    "description": "City for the contact\n"
+                },
+                "country": {
+                    "type": "string",
+                    "description": "The two letter country code for the contact\n"
+                },
+                "dataObfuscated": {
+                    "type": "boolean",
+                    "description": "Whether or not to obfuscate contact data in WHOIS\n"
+                },
+                "email": {
+                    "type": "string",
+                    "description": "Contact email address\n"
+                },
+                "extraParameters": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "Extra parameters, needed for some jurisdictions\n"
+                },
+                "familyName": {
+                    "type": "string",
+                    "description": "Family name of the contact\n"
+                },
+                "givenName": {
+                    "type": "string",
+                    "description": "Given name of the contact\n"
+                },
+                "mailObfuscated": {
+                    "type": "boolean",
+                    "description": "Whether or not to obfuscate contact email in WHOIS\n"
+                },
+                "organisation": {
+                    "type": "string",
+                    "description": "The legal name of the organisation. Required for types other than person\n"
+                },
+                "phone": {
+                    "type": "string",
+                    "description": "Phone number for the contact\n"
+                },
+                "state": {
+                    "type": "string",
+                    "description": "The state code for the contact\n"
+                },
+                "streetAddr": {
+                    "type": "string",
+                    "description": "Street Address of the contact\n"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "One of 'person', 'company', 'association', 'public body', or 'reseller'\n"
+                },
+                "zip": {
+                    "type": "string",
+                    "description": "Postal Code/Zipcode of the contact\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "city",
+                "country",
+                "email",
+                "familyName",
+                "givenName",
+                "phone",
+                "streetAddr",
+                "type",
+                "zip"
+            ]
+        }
+    },
+    "provider": {
+        "description": "The provider type for the gandi package. By default, resources use package-wide configuration\nsettings, however an explicit `Provider` instance may be created and passed during resource\nconstruction to achieve fine-grained programmatic control over provider settings. See the\n[documentation](https://www.pulumi.com/docs/reference/programming-model/#providers) for more information.\n",
+        "properties": {
+            "dryRun": {
+                "type": "boolean",
+                "description": "Prevent the Domain provider from taking certain actions\n"
+            },
+            "key": {
+                "type": "string",
+                "description": "(DEPRECATED) A Gandi API key\n",
+                "deprecationMessage": "use personal_access_token instead",
+                "secret": true
+            },
+            "personalAccessToken": {
+                "type": "string",
+                "description": "A Gandi API Personal Access Token\n",
+                "secret": true
+            },
+            "sharingId": {
+                "type": "string",
+                "description": "(DEPRECATED) A Gandi Sharing ID\n",
+                "deprecationMessage": "use personal_access_token instead"
+            },
+            "url": {
+                "type": "string",
+                "description": "The Gandi API URL\n"
+            }
+        },
+        "inputProperties": {
+            "dryRun": {
+                "type": "boolean",
+                "description": "Prevent the Domain provider from taking certain actions\n"
+            },
+            "key": {
+                "type": "string",
+                "description": "(DEPRECATED) A Gandi API key\n",
+                "deprecationMessage": "use personal_access_token instead",
+                "secret": true
+            },
+            "personalAccessToken": {
+                "type": "string",
+                "description": "A Gandi API Personal Access Token\n",
+                "secret": true
+            },
+            "sharingId": {
+                "type": "string",
+                "description": "(DEPRECATED) A Gandi Sharing ID\n",
+                "deprecationMessage": "use personal_access_token instead"
+            },
+            "url": {
+                "type": "string",
+                "description": "The Gandi API URL\n"
+            }
+        }
+    },
+    "resources": {
+        "gandi:domains/dNSSecKey:DNSSecKey": {
+            "properties": {
+                "algorithm": {
+                    "type": "integer",
+                    "description": "DNSSEC algorithm type\n"
+                },
+                "domain": {
+                    "type": "string",
+                    "description": "Domain name\n"
+                },
+                "publicKey": {
+                    "type": "string",
+                    "description": "DNSSEC public key\n"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "DNSSEC key type\n"
+                }
+            },
+            "required": [
+                "algorithm",
+                "domain",
+                "publicKey",
+                "type"
+            ],
+            "inputProperties": {
+                "algorithm": {
+                    "type": "integer",
+                    "description": "DNSSEC algorithm type\n",
+                    "willReplaceOnChanges": true
+                },
+                "domain": {
+                    "type": "string",
+                    "description": "Domain name\n",
+                    "willReplaceOnChanges": true
+                },
+                "publicKey": {
+                    "type": "string",
+                    "description": "DNSSEC public key\n",
+                    "willReplaceOnChanges": true
+                },
+                "type": {
+                    "type": "string",
+                    "description": "DNSSEC key type\n",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "requiredInputs": [
+                "algorithm",
+                "domain",
+                "publicKey",
+                "type"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering DNSSecKey resources.\n",
+                "properties": {
+                    "algorithm": {
+                        "type": "integer",
+                        "description": "DNSSEC algorithm type\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "domain": {
+                        "type": "string",
+                        "description": "Domain name\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "publicKey": {
+                        "type": "string",
+                        "description": "DNSSEC public key\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "type": {
+                        "type": "string",
+                        "description": "DNSSEC key type\n",
+                        "willReplaceOnChanges": true
+                    }
+                },
+                "type": "object"
+            },
+            "aliases": [
+                {
+                    "type": "gandi:index/dnssecKey:DnssecKey"
+                }
+            ]
+        },
+        "gandi:domains/domain:Domain": {
+            "properties": {
+                "admin": {
+                    "$ref": "#/types/gandi:domains/DomainAdmin:DomainAdmin"
+                },
+                "autorenew": {
+                    "type": "boolean",
+                    "description": "Should the domain autorenew\n"
+                },
+                "billing": {
+                    "$ref": "#/types/gandi:domains/DomainBilling:DomainBilling"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The FQDN of the domain\n"
+                },
+                "nameservers": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "A list of nameservers for the domain\n",
+                    "deprecationMessage": "This nameservers attribute will be removed on next major release: the nameservers resource has to be used instead.\nSee https://github.com/go-gandi/terraform-provider-gandi/issues/88 for details."
+                },
+                "owner": {
+                    "$ref": "#/types/gandi:domains/DomainOwner:DomainOwner"
+                },
+                "tags": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "A list of tags attached to the domain\n"
+                },
+                "tech": {
+                    "$ref": "#/types/gandi:domains/DomainTech:DomainTech"
+                }
+            },
+            "required": [
+                "admin",
+                "billing",
+                "name",
+                "owner",
+                "tech"
+            ],
+            "inputProperties": {
+                "admin": {
+                    "$ref": "#/types/gandi:domains/DomainAdmin:DomainAdmin"
+                },
+                "autorenew": {
+                    "type": "boolean",
+                    "description": "Should the domain autorenew\n"
+                },
+                "billing": {
+                    "$ref": "#/types/gandi:domains/DomainBilling:DomainBilling"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The FQDN of the domain\n"
+                },
+                "nameservers": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "A list of nameservers for the domain\n",
+                    "deprecationMessage": "This nameservers attribute will be removed on next major release: the nameservers resource has to be used instead.\nSee https://github.com/go-gandi/terraform-provider-gandi/issues/88 for details."
+                },
+                "owner": {
+                    "$ref": "#/types/gandi:domains/DomainOwner:DomainOwner"
+                },
+                "tags": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "A list of tags attached to the domain\n"
+                },
+                "tech": {
+                    "$ref": "#/types/gandi:domains/DomainTech:DomainTech"
+                }
+            },
+            "requiredInputs": [
+                "owner"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering Domain resources.\n",
+                "properties": {
+                    "admin": {
+                        "$ref": "#/types/gandi:domains/DomainAdmin:DomainAdmin"
+                    },
+                    "autorenew": {
+                        "type": "boolean",
+                        "description": "Should the domain autorenew\n"
+                    },
+                    "billing": {
+                        "$ref": "#/types/gandi:domains/DomainBilling:DomainBilling"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The FQDN of the domain\n"
+                    },
+                    "nameservers": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "A list of nameservers for the domain\n",
+                        "deprecationMessage": "This nameservers attribute will be removed on next major release: the nameservers resource has to be used instead.\nSee https://github.com/go-gandi/terraform-provider-gandi/issues/88 for details."
+                    },
+                    "owner": {
+                        "$ref": "#/types/gandi:domains/DomainOwner:DomainOwner"
+                    },
+                    "tags": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "A list of tags attached to the domain\n"
+                    },
+                    "tech": {
+                        "$ref": "#/types/gandi:domains/DomainTech:DomainTech"
+                    }
+                },
+                "type": "object"
+            },
+            "aliases": [
+                {
+                    "type": "gandi:index/domain:Domain"
+                }
+            ]
+        },
+        "gandi:domains/glueRecord:GlueRecord": {
+            "properties": {
+                "fqdn": {
+                    "type": "string",
+                    "description": "The fqdn of the record\n"
+                },
+                "fqdnUnicode": {
+                    "type": "string",
+                    "description": "The fqdn unicode of the record\n"
+                },
+                "href": {
+                    "type": "string",
+                    "description": "The href of the record\n"
+                },
+                "ips": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "List of IP addresses\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Host name of the glue record\n"
+                },
+                "zone": {
+                    "type": "string",
+                    "description": "Domain name\n"
+                }
+            },
+            "required": [
+                "fqdn",
+                "fqdnUnicode",
+                "href",
+                "ips",
+                "name",
+                "zone"
+            ],
+            "inputProperties": {
+                "ips": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "List of IP addresses\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Host name of the glue record\n",
+                    "willReplaceOnChanges": true
+                },
+                "zone": {
+                    "type": "string",
+                    "description": "Domain name\n",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "requiredInputs": [
+                "ips",
+                "zone"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering GlueRecord resources.\n",
+                "properties": {
+                    "fqdn": {
+                        "type": "string",
+                        "description": "The fqdn of the record\n"
+                    },
+                    "fqdnUnicode": {
+                        "type": "string",
+                        "description": "The fqdn unicode of the record\n"
+                    },
+                    "href": {
+                        "type": "string",
+                        "description": "The href of the record\n"
+                    },
+                    "ips": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of IP addresses\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Host name of the glue record\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "zone": {
+                        "type": "string",
+                        "description": "Domain name\n",
+                        "willReplaceOnChanges": true
+                    }
+                },
+                "type": "object"
+            },
+            "aliases": [
+                {
+                    "type": "gandi:index/glueRecord:GlueRecord"
+                }
+            ]
+        },
+        "gandi:domains/nameservers:Nameservers": {
+            "properties": {
+                "domain": {
+                    "type": "string",
+                    "description": "The FQDN of the domain\n"
+                },
+                "nameservers": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "A list of nameservers for the domain\n",
+                    "language": {
+                        "csharp": {
+                            "name": "Servers"
+                        }
+                    }
+                }
+            },
+            "required": [
+                "domain"
+            ],
+            "inputProperties": {
+                "domain": {
+                    "type": "string",
+                    "description": "The FQDN of the domain\n"
+                },
+                "nameservers": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "A list of nameservers for the domain\n",
+                    "language": {
+                        "csharp": {
+                            "name": "Servers"
+                        }
+                    }
+                }
+            },
+            "requiredInputs": [
+                "domain"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering Nameservers resources.\n",
+                "properties": {
+                    "domain": {
+                        "type": "string",
+                        "description": "The FQDN of the domain\n"
+                    },
+                    "nameservers": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "A list of nameservers for the domain\n",
+                        "language": {
+                            "csharp": {
+                                "name": "Servers"
+                            }
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "aliases": [
+                {
+                    "type": "gandi:index/nameservers:Nameservers"
+                }
+            ]
+        },
+        "gandi:email/forwarding:Forwarding": {
+            "properties": {
+                "destinations": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Forwards to email addresses\n"
+                },
+                "source": {
+                    "type": "string",
+                    "description": "Account alias name\n"
+                }
+            },
+            "required": [
+                "destinations",
+                "source"
+            ],
+            "inputProperties": {
+                "destinations": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Forwards to email addresses\n"
+                },
+                "source": {
+                    "type": "string",
+                    "description": "Account alias name\n"
+                }
+            },
+            "requiredInputs": [
+                "destinations",
+                "source"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering Forwarding resources.\n",
+                "properties": {
+                    "destinations": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Forwards to email addresses\n"
+                    },
+                    "source": {
+                        "type": "string",
+                        "description": "Account alias name\n"
+                    }
+                },
+                "type": "object"
+            },
+            "aliases": [
+                {
+                    "type": "gandi:index/emailForwarding:EmailForwarding"
+                }
+            ]
+        },
+        "gandi:email/mailbox:Mailbox": {
+            "properties": {
+                "aliases": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Aliases for email\n"
+                },
+                "domain": {
+                    "type": "string",
+                    "description": "Domain name\n"
+                },
+                "login": {
+                    "type": "string",
+                    "description": "Login\n"
+                },
+                "mailboxType": {
+                    "type": "string",
+                    "description": "Mailbox type\n"
+                },
+                "password": {
+                    "type": "string",
+                    "description": "Password\n",
+                    "secret": true
+                }
+            },
+            "required": [
+                "domain",
+                "login",
+                "password"
+            ],
+            "inputProperties": {
+                "aliases": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Aliases for email\n"
+                },
+                "domain": {
+                    "type": "string",
+                    "description": "Domain name\n"
+                },
+                "login": {
+                    "type": "string",
+                    "description": "Login\n"
+                },
+                "mailboxType": {
+                    "type": "string",
+                    "description": "Mailbox type\n"
+                },
+                "password": {
+                    "type": "string",
+                    "description": "Password\n",
+                    "secret": true
+                }
+            },
+            "requiredInputs": [
+                "domain",
+                "login",
+                "password"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering Mailbox resources.\n",
+                "properties": {
+                    "aliases": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Aliases for email\n"
+                    },
+                    "domain": {
+                        "type": "string",
+                        "description": "Domain name\n"
+                    },
+                    "login": {
+                        "type": "string",
+                        "description": "Login\n"
+                    },
+                    "mailboxType": {
+                        "type": "string",
+                        "description": "Mailbox type\n"
+                    },
+                    "password": {
+                        "type": "string",
+                        "description": "Password\n",
+                        "secret": true
+                    }
+                },
+                "type": "object"
+            },
+            "aliases": [
+                {
+                    "type": "gandi:index/mailbox:Mailbox"
+                }
+            ]
+        },
+        "gandi:index/dnssecKey:DnssecKey": {
+            "properties": {
+                "algorithm": {
+                    "type": "integer",
+                    "description": "DNSSEC algorithm type\n"
+                },
+                "domain": {
+                    "type": "string",
+                    "description": "Domain name\n"
+                },
+                "publicKey": {
+                    "type": "string",
+                    "description": "DNSSEC public key\n"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "DNSSEC key type\n"
+                }
+            },
+            "required": [
+                "algorithm",
+                "domain",
+                "publicKey",
+                "type"
+            ],
+            "inputProperties": {
+                "algorithm": {
+                    "type": "integer",
+                    "description": "DNSSEC algorithm type\n",
+                    "willReplaceOnChanges": true
+                },
+                "domain": {
+                    "type": "string",
+                    "description": "Domain name\n",
+                    "willReplaceOnChanges": true
+                },
+                "publicKey": {
+                    "type": "string",
+                    "description": "DNSSEC public key\n",
+                    "willReplaceOnChanges": true
+                },
+                "type": {
+                    "type": "string",
+                    "description": "DNSSEC key type\n",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "requiredInputs": [
+                "algorithm",
+                "domain",
+                "publicKey",
+                "type"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering DnssecKey resources.\n",
+                "properties": {
+                    "algorithm": {
+                        "type": "integer",
+                        "description": "DNSSEC algorithm type\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "domain": {
+                        "type": "string",
+                        "description": "Domain name\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "publicKey": {
+                        "type": "string",
+                        "description": "DNSSEC public key\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "type": {
+                        "type": "string",
+                        "description": "DNSSEC key type\n",
+                        "willReplaceOnChanges": true
+                    }
+                },
+                "type": "object"
+            },
+            "deprecationMessage": "gandi.index/dnsseckey.DnssecKey has been deprecated in favor of gandi.domains/dnsseckey.DNSSecKey"
+        },
+        "gandi:index/domain:Domain": {
+            "properties": {
+                "admin": {
+                    "$ref": "#/types/gandi:index/DomainAdmin:DomainAdmin"
+                },
+                "autorenew": {
+                    "type": "boolean",
+                    "description": "Should the domain autorenew\n"
+                },
+                "billing": {
+                    "$ref": "#/types/gandi:index/DomainBilling:DomainBilling"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The FQDN of the domain\n"
+                },
+                "nameservers": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "A list of nameservers for the domain\n",
+                    "deprecationMessage": "This nameservers attribute will be removed on next major release: the nameservers resource has to be used instead.\nSee https://github.com/go-gandi/terraform-provider-gandi/issues/88 for details."
+                },
+                "owner": {
+                    "$ref": "#/types/gandi:index/DomainOwner:DomainOwner"
+                },
+                "tags": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "A list of tags attached to the domain\n"
+                },
+                "tech": {
+                    "$ref": "#/types/gandi:index/DomainTech:DomainTech"
+                }
+            },
+            "required": [
+                "admin",
+                "billing",
+                "name",
+                "owner",
+                "tech"
+            ],
+            "inputProperties": {
+                "admin": {
+                    "$ref": "#/types/gandi:index/DomainAdmin:DomainAdmin"
+                },
+                "autorenew": {
+                    "type": "boolean",
+                    "description": "Should the domain autorenew\n"
+                },
+                "billing": {
+                    "$ref": "#/types/gandi:index/DomainBilling:DomainBilling"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The FQDN of the domain\n"
+                },
+                "nameservers": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "A list of nameservers for the domain\n",
+                    "deprecationMessage": "This nameservers attribute will be removed on next major release: the nameservers resource has to be used instead.\nSee https://github.com/go-gandi/terraform-provider-gandi/issues/88 for details."
+                },
+                "owner": {
+                    "$ref": "#/types/gandi:index/DomainOwner:DomainOwner"
+                },
+                "tags": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "A list of tags attached to the domain\n"
+                },
+                "tech": {
+                    "$ref": "#/types/gandi:index/DomainTech:DomainTech"
+                }
+            },
+            "requiredInputs": [
+                "owner"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering Domain resources.\n",
+                "properties": {
+                    "admin": {
+                        "$ref": "#/types/gandi:index/DomainAdmin:DomainAdmin"
+                    },
+                    "autorenew": {
+                        "type": "boolean",
+                        "description": "Should the domain autorenew\n"
+                    },
+                    "billing": {
+                        "$ref": "#/types/gandi:index/DomainBilling:DomainBilling"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The FQDN of the domain\n"
+                    },
+                    "nameservers": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "A list of nameservers for the domain\n",
+                        "deprecationMessage": "This nameservers attribute will be removed on next major release: the nameservers resource has to be used instead.\nSee https://github.com/go-gandi/terraform-provider-gandi/issues/88 for details."
+                    },
+                    "owner": {
+                        "$ref": "#/types/gandi:index/DomainOwner:DomainOwner"
+                    },
+                    "tags": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "A list of tags attached to the domain\n"
+                    },
+                    "tech": {
+                        "$ref": "#/types/gandi:index/DomainTech:DomainTech"
+                    }
+                },
+                "type": "object"
+            },
+            "deprecationMessage": "gandi.index/domain.Domain has been deprecated in favor of gandi.domains/domain.Domain"
+        },
+        "gandi:index/emailForwarding:EmailForwarding": {
+            "properties": {
+                "destinations": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Forwards to email addresses\n"
+                },
+                "source": {
+                    "type": "string",
+                    "description": "Account alias name\n"
+                }
+            },
+            "required": [
+                "destinations",
+                "source"
+            ],
+            "inputProperties": {
+                "destinations": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Forwards to email addresses\n"
+                },
+                "source": {
+                    "type": "string",
+                    "description": "Account alias name\n"
+                }
+            },
+            "requiredInputs": [
+                "destinations",
+                "source"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering EmailForwarding resources.\n",
+                "properties": {
+                    "destinations": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Forwards to email addresses\n"
+                    },
+                    "source": {
+                        "type": "string",
+                        "description": "Account alias name\n"
+                    }
+                },
+                "type": "object"
+            },
+            "deprecationMessage": "gandi.index/emailforwarding.EmailForwarding has been deprecated in favor of gandi.email/forwarding.Forwarding"
+        },
+        "gandi:index/glueRecord:GlueRecord": {
+            "properties": {
+                "fqdn": {
+                    "type": "string",
+                    "description": "The fqdn of the record\n"
+                },
+                "fqdnUnicode": {
+                    "type": "string",
+                    "description": "The fqdn unicode of the record\n"
+                },
+                "href": {
+                    "type": "string",
+                    "description": "The href of the record\n"
+                },
+                "ips": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "List of IP addresses\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Host name of the glue record\n"
+                },
+                "zone": {
+                    "type": "string",
+                    "description": "Domain name\n"
+                }
+            },
+            "required": [
+                "fqdn",
+                "fqdnUnicode",
+                "href",
+                "ips",
+                "name",
+                "zone"
+            ],
+            "inputProperties": {
+                "ips": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "List of IP addresses\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Host name of the glue record\n",
+                    "willReplaceOnChanges": true
+                },
+                "zone": {
+                    "type": "string",
+                    "description": "Domain name\n",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "requiredInputs": [
+                "ips",
+                "zone"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering GlueRecord resources.\n",
+                "properties": {
+                    "fqdn": {
+                        "type": "string",
+                        "description": "The fqdn of the record\n"
+                    },
+                    "fqdnUnicode": {
+                        "type": "string",
+                        "description": "The fqdn unicode of the record\n"
+                    },
+                    "href": {
+                        "type": "string",
+                        "description": "The href of the record\n"
+                    },
+                    "ips": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "List of IP addresses\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Host name of the glue record\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "zone": {
+                        "type": "string",
+                        "description": "Domain name\n",
+                        "willReplaceOnChanges": true
+                    }
+                },
+                "type": "object"
+            },
+            "deprecationMessage": "gandi.index/gluerecord.GlueRecord has been deprecated in favor of gandi.domains/gluerecord.GlueRecord"
+        },
+        "gandi:index/livednsDomain:LivednsDomain": {
+            "properties": {
+                "automaticSnapshots": {
+                    "type": "boolean",
+                    "description": "Enable or disable the automatic creation of snapshots when records are changed\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The FQDN of the domain\n"
+                },
+                "ttl": {
+                    "type": "integer",
+                    "description": "The SOA TTL for the domain\n",
+                    "deprecationMessage": "This ttl attribute will be removed on next major release: this attribute should not be exposed to the user.\nSee https://github.com/go-gandi/terraform-provider-gandi/pull/90 for details."
+                }
+            },
+            "required": [
+                "name"
+            ],
+            "inputProperties": {
+                "automaticSnapshots": {
+                    "type": "boolean",
+                    "description": "Enable or disable the automatic creation of snapshots when records are changed\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The FQDN of the domain\n",
+                    "willReplaceOnChanges": true
+                },
+                "ttl": {
+                    "type": "integer",
+                    "description": "The SOA TTL for the domain\n",
+                    "deprecationMessage": "This ttl attribute will be removed on next major release: this attribute should not be exposed to the user.\nSee https://github.com/go-gandi/terraform-provider-gandi/pull/90 for details.",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering LivednsDomain resources.\n",
+                "properties": {
+                    "automaticSnapshots": {
+                        "type": "boolean",
+                        "description": "Enable or disable the automatic creation of snapshots when records are changed\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The FQDN of the domain\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "ttl": {
+                        "type": "integer",
+                        "description": "The SOA TTL for the domain\n",
+                        "deprecationMessage": "This ttl attribute will be removed on next major release: this attribute should not be exposed to the user.\nSee https://github.com/go-gandi/terraform-provider-gandi/pull/90 for details.",
+                        "willReplaceOnChanges": true
+                    }
+                },
+                "type": "object"
+            },
+            "deprecationMessage": "gandi.index/livednsdomain.LivednsDomain has been deprecated in favor of gandi.livedns/domain.Domain"
+        },
+        "gandi:index/livednsRecord:LivednsRecord": {
+            "properties": {
+                "href": {
+                    "type": "string",
+                    "description": "The href of the record\n"
+                },
+                "mutable": {
+                    "type": "boolean",
+                    "description": "Define if the record can be modified outside Terraform (this currently only works for TXT records)\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the record\n"
+                },
+                "ttl": {
+                    "type": "integer",
+                    "description": "The TTL of the record\n"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "The type of the record\n"
+                },
+                "values": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "A list of values of the record\n"
+                },
+                "zone": {
+                    "type": "string",
+                    "description": "The FQDN of the domain\n"
+                }
+            },
+            "required": [
+                "href",
+                "name",
+                "ttl",
+                "type",
+                "values",
+                "zone"
+            ],
+            "inputProperties": {
+                "mutable": {
+                    "type": "boolean",
+                    "description": "Define if the record can be modified outside Terraform (this currently only works for TXT records)\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the record\n",
+                    "willReplaceOnChanges": true
+                },
+                "ttl": {
+                    "type": "integer",
+                    "description": "The TTL of the record\n"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "The type of the record\n",
+                    "willReplaceOnChanges": true
+                },
+                "values": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "A list of values of the record\n"
+                },
+                "zone": {
+                    "type": "string",
+                    "description": "The FQDN of the domain\n",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "requiredInputs": [
+                "ttl",
+                "type",
+                "values",
+                "zone"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering LivednsRecord resources.\n",
+                "properties": {
+                    "href": {
+                        "type": "string",
+                        "description": "The href of the record\n"
+                    },
+                    "mutable": {
+                        "type": "boolean",
+                        "description": "Define if the record can be modified outside Terraform (this currently only works for TXT records)\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The name of the record\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "ttl": {
+                        "type": "integer",
+                        "description": "The TTL of the record\n"
+                    },
+                    "type": {
+                        "type": "string",
+                        "description": "The type of the record\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "values": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "A list of values of the record\n"
+                    },
+                    "zone": {
+                        "type": "string",
+                        "description": "The FQDN of the domain\n",
+                        "willReplaceOnChanges": true
+                    }
+                },
+                "type": "object"
+            },
+            "deprecationMessage": "gandi.index/livednsrecord.LivednsRecord has been deprecated in favor of gandi.livedns/record.Record"
+        },
+        "gandi:index/mailbox:Mailbox": {
+            "properties": {
+                "aliases": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Aliases for email\n"
+                },
+                "domain": {
+                    "type": "string",
+                    "description": "Domain name\n"
+                },
+                "login": {
+                    "type": "string",
+                    "description": "Login\n"
+                },
+                "mailboxType": {
+                    "type": "string",
+                    "description": "Mailbox type\n"
+                },
+                "password": {
+                    "type": "string",
+                    "description": "Password\n",
+                    "secret": true
+                }
+            },
+            "required": [
+                "domain",
+                "login",
+                "password"
+            ],
+            "inputProperties": {
+                "aliases": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Aliases for email\n"
+                },
+                "domain": {
+                    "type": "string",
+                    "description": "Domain name\n"
+                },
+                "login": {
+                    "type": "string",
+                    "description": "Login\n"
+                },
+                "mailboxType": {
+                    "type": "string",
+                    "description": "Mailbox type\n"
+                },
+                "password": {
+                    "type": "string",
+                    "description": "Password\n",
+                    "secret": true
+                }
+            },
+            "requiredInputs": [
+                "domain",
+                "login",
+                "password"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering Mailbox resources.\n",
+                "properties": {
+                    "aliases": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Aliases for email\n"
+                    },
+                    "domain": {
+                        "type": "string",
+                        "description": "Domain name\n"
+                    },
+                    "login": {
+                        "type": "string",
+                        "description": "Login\n"
+                    },
+                    "mailboxType": {
+                        "type": "string",
+                        "description": "Mailbox type\n"
+                    },
+                    "password": {
+                        "type": "string",
+                        "description": "Password\n",
+                        "secret": true
+                    }
+                },
+                "type": "object"
+            },
+            "deprecationMessage": "gandi.index/mailbox.Mailbox has been deprecated in favor of gandi.email/mailbox.Mailbox"
+        },
+        "gandi:index/nameservers:Nameservers": {
+            "properties": {
+                "domain": {
+                    "type": "string",
+                    "description": "The FQDN of the domain\n"
+                },
+                "nameservers": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "A list of nameservers for the domain\n",
+                    "language": {
+                        "csharp": {
+                            "name": "Servers"
+                        }
+                    }
+                }
+            },
+            "required": [
+                "domain"
+            ],
+            "inputProperties": {
+                "domain": {
+                    "type": "string",
+                    "description": "The FQDN of the domain\n"
+                },
+                "nameservers": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "A list of nameservers for the domain\n",
+                    "language": {
+                        "csharp": {
+                            "name": "Servers"
+                        }
+                    }
+                }
+            },
+            "requiredInputs": [
+                "domain"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering Nameservers resources.\n",
+                "properties": {
+                    "domain": {
+                        "type": "string",
+                        "description": "The FQDN of the domain\n"
+                    },
+                    "nameservers": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "A list of nameservers for the domain\n",
+                        "language": {
+                            "csharp": {
+                                "name": "Servers"
+                            }
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "deprecationMessage": "gandi.index/nameservers.Nameservers has been deprecated in favor of gandi.domains/nameservers.Nameservers"
+        },
+        "gandi:index/simplehostingInstance:SimplehostingInstance": {
+            "properties": {
+                "databaseName": {
+                    "type": "string",
+                    "description": "The name of the database type ('mysql' or 'pgsql')\n"
+                },
+                "languageName": {
+                    "type": "string",
+                    "description": "The name of the language ('php', 'python', 'nodejs' or 'ruby')\n"
+                },
+                "location": {
+                    "type": "string",
+                    "description": "The datacenter location of the instance ('FR' or 'LU')\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the SimpleHosting instance\n"
+                },
+                "size": {
+                    "type": "string",
+                    "description": "The size of the SimpleHosting instance ('s+', 'm', 'l' or 'xxl')\n"
+                }
+            },
+            "required": [
+                "databaseName",
+                "languageName",
+                "location",
+                "name",
+                "size"
+            ],
+            "inputProperties": {
+                "databaseName": {
+                    "type": "string",
+                    "description": "The name of the database type ('mysql' or 'pgsql')\n",
+                    "willReplaceOnChanges": true
+                },
+                "languageName": {
+                    "type": "string",
+                    "description": "The name of the language ('php', 'python', 'nodejs' or 'ruby')\n",
+                    "willReplaceOnChanges": true
+                },
+                "location": {
+                    "type": "string",
+                    "description": "The datacenter location of the instance ('FR' or 'LU')\n",
+                    "willReplaceOnChanges": true
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the SimpleHosting instance\n",
+                    "willReplaceOnChanges": true
+                },
+                "size": {
+                    "type": "string",
+                    "description": "The size of the SimpleHosting instance ('s+', 'm', 'l' or 'xxl')\n",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "requiredInputs": [
+                "databaseName",
+                "languageName",
+                "location",
+                "size"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering SimplehostingInstance resources.\n",
+                "properties": {
+                    "databaseName": {
+                        "type": "string",
+                        "description": "The name of the database type ('mysql' or 'pgsql')\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "languageName": {
+                        "type": "string",
+                        "description": "The name of the language ('php', 'python', 'nodejs' or 'ruby')\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "location": {
+                        "type": "string",
+                        "description": "The datacenter location of the instance ('FR' or 'LU')\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The name of the SimpleHosting instance\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "size": {
+                        "type": "string",
+                        "description": "The size of the SimpleHosting instance ('s+', 'm', 'l' or 'xxl')\n",
+                        "willReplaceOnChanges": true
+                    }
+                },
+                "type": "object"
+            },
+            "deprecationMessage": "gandi.index/simplehostinginstance.SimplehostingInstance has been deprecated in favor of gandi.simplehosting/instance.Instance"
+        },
+        "gandi:index/simplehostingVhost:SimplehostingVhost": {
+            "properties": {
+                "application": {
+                    "type": "string",
+                    "description": "The name of an application to install ('grav', 'matomo', 'nextcloud', 'prestashop', 'wordpress')\n"
+                },
+                "certificateId": {
+                    "type": "string",
+                    "description": "The ID of the created free certificate\n"
+                },
+                "fqdn": {
+                    "type": "string",
+                    "description": "The FQDN of the Vhost\n"
+                },
+                "instanceId": {
+                    "type": "string",
+                    "description": "The ID of the SimpleHosting instance\n"
+                },
+                "linkedDnsZoneAlteration": {
+                    "type": "boolean",
+                    "description": "Whether to alter the linked DNS Zone\n"
+                }
+            },
+            "required": [
+                "certificateId",
+                "fqdn",
+                "instanceId"
+            ],
+            "inputProperties": {
+                "application": {
+                    "type": "string",
+                    "description": "The name of an application to install ('grav', 'matomo', 'nextcloud', 'prestashop', 'wordpress')\n",
+                    "willReplaceOnChanges": true
+                },
+                "fqdn": {
+                    "type": "string",
+                    "description": "The FQDN of the Vhost\n",
+                    "willReplaceOnChanges": true
+                },
+                "instanceId": {
+                    "type": "string",
+                    "description": "The ID of the SimpleHosting instance\n",
+                    "willReplaceOnChanges": true
+                },
+                "linkedDnsZoneAlteration": {
+                    "type": "boolean",
+                    "description": "Whether to alter the linked DNS Zone\n",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "requiredInputs": [
+                "fqdn",
+                "instanceId"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering SimplehostingVhost resources.\n",
+                "properties": {
+                    "application": {
+                        "type": "string",
+                        "description": "The name of an application to install ('grav', 'matomo', 'nextcloud', 'prestashop', 'wordpress')\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "certificateId": {
+                        "type": "string",
+                        "description": "The ID of the created free certificate\n"
+                    },
+                    "fqdn": {
+                        "type": "string",
+                        "description": "The FQDN of the Vhost\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "instanceId": {
+                        "type": "string",
+                        "description": "The ID of the SimpleHosting instance\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "linkedDnsZoneAlteration": {
+                        "type": "boolean",
+                        "description": "Whether to alter the linked DNS Zone\n",
+                        "willReplaceOnChanges": true
+                    }
+                },
+                "type": "object"
+            },
+            "deprecationMessage": "gandi.index/simplehostingvhost.SimplehostingVhost has been deprecated in favor of gandi.simplehosting/vhost.VHost"
+        },
+        "gandi:livedns/domain:Domain": {
+            "properties": {
+                "automaticSnapshots": {
+                    "type": "boolean",
+                    "description": "Enable or disable the automatic creation of snapshots when records are changed\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The FQDN of the domain\n"
+                },
+                "ttl": {
+                    "type": "integer",
+                    "description": "The SOA TTL for the domain\n",
+                    "deprecationMessage": "This ttl attribute will be removed on next major release: this attribute should not be exposed to the user.\nSee https://github.com/go-gandi/terraform-provider-gandi/pull/90 for details."
+                }
+            },
+            "required": [
+                "name"
+            ],
+            "inputProperties": {
+                "automaticSnapshots": {
+                    "type": "boolean",
+                    "description": "Enable or disable the automatic creation of snapshots when records are changed\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The FQDN of the domain\n",
+                    "willReplaceOnChanges": true
+                },
+                "ttl": {
+                    "type": "integer",
+                    "description": "The SOA TTL for the domain\n",
+                    "deprecationMessage": "This ttl attribute will be removed on next major release: this attribute should not be exposed to the user.\nSee https://github.com/go-gandi/terraform-provider-gandi/pull/90 for details.",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering Domain resources.\n",
+                "properties": {
+                    "automaticSnapshots": {
+                        "type": "boolean",
+                        "description": "Enable or disable the automatic creation of snapshots when records are changed\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The FQDN of the domain\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "ttl": {
+                        "type": "integer",
+                        "description": "The SOA TTL for the domain\n",
+                        "deprecationMessage": "This ttl attribute will be removed on next major release: this attribute should not be exposed to the user.\nSee https://github.com/go-gandi/terraform-provider-gandi/pull/90 for details.",
+                        "willReplaceOnChanges": true
+                    }
+                },
+                "type": "object"
+            },
+            "aliases": [
+                {
+                    "type": "gandi:index/livednsDomain:LivednsDomain"
+                }
+            ]
+        },
+        "gandi:livedns/record:Record": {
+            "properties": {
+                "href": {
+                    "type": "string",
+                    "description": "The href of the record\n"
+                },
+                "mutable": {
+                    "type": "boolean",
+                    "description": "Define if the record can be modified outside Terraform (this currently only works for TXT records)\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the record\n"
+                },
+                "ttl": {
+                    "type": "integer",
+                    "description": "The TTL of the record\n"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "The type of the record\n"
+                },
+                "values": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "A list of values of the record\n"
+                },
+                "zone": {
+                    "type": "string",
+                    "description": "The FQDN of the domain\n"
+                }
+            },
+            "required": [
+                "href",
+                "name",
+                "ttl",
+                "type",
+                "values",
+                "zone"
+            ],
+            "inputProperties": {
+                "mutable": {
+                    "type": "boolean",
+                    "description": "Define if the record can be modified outside Terraform (this currently only works for TXT records)\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the record\n",
+                    "willReplaceOnChanges": true
+                },
+                "ttl": {
+                    "type": "integer",
+                    "description": "The TTL of the record\n"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "The type of the record\n",
+                    "willReplaceOnChanges": true
+                },
+                "values": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "A list of values of the record\n"
+                },
+                "zone": {
+                    "type": "string",
+                    "description": "The FQDN of the domain\n",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "requiredInputs": [
+                "ttl",
+                "type",
+                "values",
+                "zone"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering Record resources.\n",
+                "properties": {
+                    "href": {
+                        "type": "string",
+                        "description": "The href of the record\n"
+                    },
+                    "mutable": {
+                        "type": "boolean",
+                        "description": "Define if the record can be modified outside Terraform (this currently only works for TXT records)\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The name of the record\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "ttl": {
+                        "type": "integer",
+                        "description": "The TTL of the record\n"
+                    },
+                    "type": {
+                        "type": "string",
+                        "description": "The type of the record\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "values": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "A list of values of the record\n"
+                    },
+                    "zone": {
+                        "type": "string",
+                        "description": "The FQDN of the domain\n",
+                        "willReplaceOnChanges": true
+                    }
+                },
+                "type": "object"
+            },
+            "aliases": [
+                {
+                    "type": "gandi:index/livednsRecord:LivednsRecord"
+                }
+            ]
+        },
+        "gandi:simplehosting/instance:Instance": {
+            "properties": {
+                "databaseName": {
+                    "type": "string",
+                    "description": "The name of the database type ('mysql' or 'pgsql')\n"
+                },
+                "languageName": {
+                    "type": "string",
+                    "description": "The name of the language ('php', 'python', 'nodejs' or 'ruby')\n"
+                },
+                "location": {
+                    "type": "string",
+                    "description": "The datacenter location of the instance ('FR' or 'LU')\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the SimpleHosting instance\n"
+                },
+                "size": {
+                    "type": "string",
+                    "description": "The size of the SimpleHosting instance ('s+', 'm', 'l' or 'xxl')\n"
+                }
+            },
+            "required": [
+                "databaseName",
+                "languageName",
+                "location",
+                "name",
+                "size"
+            ],
+            "inputProperties": {
+                "databaseName": {
+                    "type": "string",
+                    "description": "The name of the database type ('mysql' or 'pgsql')\n",
+                    "willReplaceOnChanges": true
+                },
+                "languageName": {
+                    "type": "string",
+                    "description": "The name of the language ('php', 'python', 'nodejs' or 'ruby')\n",
+                    "willReplaceOnChanges": true
+                },
+                "location": {
+                    "type": "string",
+                    "description": "The datacenter location of the instance ('FR' or 'LU')\n",
+                    "willReplaceOnChanges": true
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the SimpleHosting instance\n",
+                    "willReplaceOnChanges": true
+                },
+                "size": {
+                    "type": "string",
+                    "description": "The size of the SimpleHosting instance ('s+', 'm', 'l' or 'xxl')\n",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "requiredInputs": [
+                "databaseName",
+                "languageName",
+                "location",
+                "size"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering Instance resources.\n",
+                "properties": {
+                    "databaseName": {
+                        "type": "string",
+                        "description": "The name of the database type ('mysql' or 'pgsql')\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "languageName": {
+                        "type": "string",
+                        "description": "The name of the language ('php', 'python', 'nodejs' or 'ruby')\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "location": {
+                        "type": "string",
+                        "description": "The datacenter location of the instance ('FR' or 'LU')\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The name of the SimpleHosting instance\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "size": {
+                        "type": "string",
+                        "description": "The size of the SimpleHosting instance ('s+', 'm', 'l' or 'xxl')\n",
+                        "willReplaceOnChanges": true
+                    }
+                },
+                "type": "object"
+            },
+            "aliases": [
+                {
+                    "type": "gandi:index/simplehostingInstance:SimplehostingInstance"
+                }
+            ]
+        },
+        "gandi:simplehosting/vHost:VHost": {
+            "properties": {
+                "application": {
+                    "type": "string",
+                    "description": "The name of an application to install ('grav', 'matomo', 'nextcloud', 'prestashop', 'wordpress')\n"
+                },
+                "certificateId": {
+                    "type": "string",
+                    "description": "The ID of the created free certificate\n"
+                },
+                "fqdn": {
+                    "type": "string",
+                    "description": "The FQDN of the Vhost\n"
+                },
+                "instanceId": {
+                    "type": "string",
+                    "description": "The ID of the SimpleHosting instance\n"
+                },
+                "linkedDnsZoneAlteration": {
+                    "type": "boolean",
+                    "description": "Whether to alter the linked DNS Zone\n"
+                }
+            },
+            "required": [
+                "certificateId",
+                "fqdn",
+                "instanceId"
+            ],
+            "inputProperties": {
+                "application": {
+                    "type": "string",
+                    "description": "The name of an application to install ('grav', 'matomo', 'nextcloud', 'prestashop', 'wordpress')\n",
+                    "willReplaceOnChanges": true
+                },
+                "fqdn": {
+                    "type": "string",
+                    "description": "The FQDN of the Vhost\n",
+                    "willReplaceOnChanges": true
+                },
+                "instanceId": {
+                    "type": "string",
+                    "description": "The ID of the SimpleHosting instance\n",
+                    "willReplaceOnChanges": true
+                },
+                "linkedDnsZoneAlteration": {
+                    "type": "boolean",
+                    "description": "Whether to alter the linked DNS Zone\n",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "requiredInputs": [
+                "fqdn",
+                "instanceId"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering VHost resources.\n",
+                "properties": {
+                    "application": {
+                        "type": "string",
+                        "description": "The name of an application to install ('grav', 'matomo', 'nextcloud', 'prestashop', 'wordpress')\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "certificateId": {
+                        "type": "string",
+                        "description": "The ID of the created free certificate\n"
+                    },
+                    "fqdn": {
+                        "type": "string",
+                        "description": "The FQDN of the Vhost\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "instanceId": {
+                        "type": "string",
+                        "description": "The ID of the SimpleHosting instance\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "linkedDnsZoneAlteration": {
+                        "type": "boolean",
+                        "description": "Whether to alter the linked DNS Zone\n",
+                        "willReplaceOnChanges": true
+                    }
+                },
+                "type": "object"
+            },
+            "aliases": [
+                {
+                    "type": "gandi:index/simplehostingVhost:SimplehostingVhost"
+                }
+            ]
+        }
+    },
+    "functions": {
+        "gandi:domains/getDomain:getDomain": {
+            "inputs": {
+                "description": "A collection of arguments for invoking getDomain.\n",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "The FQDN of the domain\n"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "name"
+                ]
+            },
+            "outputs": {
+                "description": "A collection of values returned by getDomain.\n",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "The provider-assigned unique ID for this managed resource.\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The FQDN of the domain\n"
+                    },
+                    "nameservers": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "A list of nameservers for the domain\n"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "name",
+                    "nameservers",
+                    "id"
+                ]
+            }
+        },
+        "gandi:domains/getGlueRecord:getGlueRecord": {
+            "inputs": {
+                "description": "A collection of arguments for invoking getGlueRecord.\n",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "Host name of the glue record\n"
+                    },
+                    "zone": {
+                        "type": "string",
+                        "description": "Domain name\n"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "name",
+                    "zone"
+                ]
+            },
+            "outputs": {
+                "description": "A collection of values returned by getGlueRecord.\n",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "The provider-assigned unique ID for this managed resource.\n"
+                    },
+                    "ips": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "A list of the ip addresses provided for the glue record\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Host name of the glue record\n"
+                    },
+                    "zone": {
+                        "type": "string",
+                        "description": "Domain name\n"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "ips",
+                    "name",
+                    "zone",
+                    "id"
+                ]
+            }
+        },
+        "gandi:email/getMailbox:getMailbox": {
+            "inputs": {
+                "description": "A collection of arguments for invoking getMailbox.\n",
+                "properties": {
+                    "domain": {
+                        "type": "string",
+                        "description": "Domain name\n"
+                    },
+                    "mailboxId": {
+                        "type": "string",
+                        "description": "Mailbox ID\n"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "domain",
+                    "mailboxId"
+                ]
+            },
+            "outputs": {
+                "description": "A collection of values returned by getMailbox.\n",
+                "properties": {
+                    "domain": {
+                        "type": "string",
+                        "description": "Domain name\n"
+                    },
+                    "id": {
+                        "type": "string",
+                        "description": "The provider-assigned unique ID for this managed resource.\n"
+                    },
+                    "mailboxId": {
+                        "type": "string",
+                        "description": "Mailbox ID\n"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "domain",
+                    "mailboxId",
+                    "id"
+                ]
+            }
+        },
+        "gandi:index/getDomain:getDomain": {
+            "deprecationMessage": "gandi.index/getdomain.getDomain has been deprecated in favor of gandi.domains/getdomain.getDomain",
+            "inputs": {
+                "description": "A collection of arguments for invoking getDomain.\n",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "name"
+                ]
+            },
+            "outputs": {
+                "description": "A collection of values returned by getDomain.\n",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "The provider-assigned unique ID for this managed resource.\n"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "nameservers": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "name",
+                    "nameservers",
+                    "id"
+                ]
+            }
+        },
+        "gandi:index/getGlueRecord:getGlueRecord": {
+            "deprecationMessage": "gandi.index/getgluerecord.getGlueRecord has been deprecated in favor of gandi.domains/getgluerecord.getGlueRecord",
+            "inputs": {
+                "description": "A collection of arguments for invoking getGlueRecord.\n",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "zone": {
+                        "type": "string"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "name",
+                    "zone"
+                ]
+            },
+            "outputs": {
+                "description": "A collection of values returned by getGlueRecord.\n",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "The provider-assigned unique ID for this managed resource.\n"
+                    },
+                    "ips": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "zone": {
+                        "type": "string"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "ips",
+                    "name",
+                    "zone",
+                    "id"
+                ]
+            }
+        },
+        "gandi:index/getLivednsDomain:getLivednsDomain": {
+            "deprecationMessage": "gandi.index/getlivednsdomain.getLivednsDomain has been deprecated in favor of gandi.livedns/getdomain.getDomain",
+            "inputs": {
+                "description": "A collection of arguments for invoking getLivednsDomain.\n",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "name"
+                ]
+            },
+            "outputs": {
+                "description": "A collection of values returned by getLivednsDomain.\n",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "The provider-assigned unique ID for this managed resource.\n"
+                    },
+                    "name": {
+                        "type": "string"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "name",
+                    "id"
+                ]
+            }
+        },
+        "gandi:index/getLivednsDomainNs:getLivednsDomainNs": {
+            "deprecationMessage": "gandi.index/getlivednsdomainns.getLivednsDomainNs has been deprecated in favor of gandi.livedns/getdomainnameserver.getDomainNameserver",
+            "inputs": {
+                "description": "A collection of arguments for invoking getLivednsDomainNs.\n",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "name"
+                ]
+            },
+            "outputs": {
+                "description": "A collection of values returned by getLivednsDomainNs.\n",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "The provider-assigned unique ID for this managed resource.\n"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "nameservers": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "name",
+                    "nameservers",
+                    "id"
+                ]
+            }
+        },
+        "gandi:index/getMailbox:getMailbox": {
+            "deprecationMessage": "gandi.index/getmailbox.getMailbox has been deprecated in favor of gandi.email/getmailbox.getMailbox",
+            "inputs": {
+                "description": "A collection of arguments for invoking getMailbox.\n",
+                "properties": {
+                    "domain": {
+                        "type": "string"
+                    },
+                    "mailboxId": {
+                        "type": "string"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "domain",
+                    "mailboxId"
+                ]
+            },
+            "outputs": {
+                "description": "A collection of values returned by getMailbox.\n",
+                "properties": {
+                    "domain": {
+                        "type": "string"
+                    },
+                    "id": {
+                        "type": "string",
+                        "description": "The provider-assigned unique ID for this managed resource.\n"
+                    },
+                    "mailboxId": {
+                        "type": "string"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "domain",
+                    "mailboxId",
+                    "id"
+                ]
+            }
+        },
+        "gandi:livedns/getDomain:getDomain": {
+            "inputs": {
+                "description": "A collection of arguments for invoking getDomain.\n",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "The FQDN of the domain\n"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "name"
+                ]
+            },
+            "outputs": {
+                "description": "A collection of values returned by getDomain.\n",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "The provider-assigned unique ID for this managed resource.\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The FQDN of the domain\n"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "name",
+                    "id"
+                ]
+            }
+        },
+        "gandi:livedns/getDomainNameserver:getDomainNameserver": {
+            "inputs": {
+                "description": "A collection of arguments for invoking getDomainNameserver.\n",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "The FQDN of the domain\n"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "name"
+                ]
+            },
+            "outputs": {
+                "description": "A collection of values returned by getDomainNameserver.\n",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "The provider-assigned unique ID for this managed resource.\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The FQDN of the domain\n"
+                    },
+                    "nameservers": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "A list of nameservers for the domain\n"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "name",
+                    "nameservers",
+                    "id"
+                ]
+            }
+        }
+    }
+}

@@ -1,9 +1,9 @@
-PROJECT_NAME := xyz Package
+PROJECT_NAME := gandi Package
 
 SHELL            := /bin/bash
-PACK             := xyz
-PROJECT          := github.com/pulumi/pulumi-xyz
-NODE_MODULE_NAME := @abc/${PACK}
+PACK             := gandi
+PROJECT          := github.com/pczora/pulumi-gandi
+NODE_MODULE_NAME := @pczora/${PACK}
 TF_NAME          := ${PACK}
 PROVIDER_PATH    := provider
 VERSION_PATH     := ${PROVIDER_PATH}/pkg/version.Version
